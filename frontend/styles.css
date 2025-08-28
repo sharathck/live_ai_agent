@@ -230,7 +230,7 @@ h1 {
   
   .state {
     min-height: 160px;
-    font-size: 1.4rem;
+    font-size: 2.4rem;
     padding: 2.5rem 1.5rem;
     margin: 1rem;
     width: calc(100% - 2rem);
@@ -242,8 +242,8 @@ h1 {
     margin-bottom: 1.2rem !important;
   }
   
-  md-outlined-button {
-    min-width: 294vw;
+  body md-outlined-button, .main-app-content md-outlined-button, #model-config-container md-outlined-button {
+  min-width: 94vw;
     max-width: 500px;
     --md-outlined-button-container-height: 110px;
     --md-outlined-button-label-text-size: 32px;
@@ -252,7 +252,7 @@ h1 {
     padding: 12px 20px !important;
   }
   
-  md-outlined-button[onclick*="connectBtnClick"] {
+  body md-outlined-button[onclick*="connectBtnClick"], .main-app-content md-outlined-button[onclick*="connectBtnClick"], #model-config-container md-outlined-button[onclick*="connectBtnClick"] {
     --md-outlined-button-container-height: 180px;
     --md-outlined-button-label-text-size: 56px;
     --md-outlined-button-label-text-weight: 800;
@@ -264,7 +264,7 @@ h1 {
     line-height: 1.2 !important;
   }
   
-  md-outlined-button[onclick*="disconnectBtnClick"] {
+  body md-outlined-button[onclick*="disconnectBtnClick"], .main-app-content md-outlined-button[onclick*="disconnectBtnClick"], #model-config-container md-outlined-button[onclick*="disconnectBtnClick"] {
     --md-outlined-button-container-height: 130px;
     --md-outlined-button-label-text-size: 38px;
     --md-outlined-button-label-text-weight: 700;
@@ -298,7 +298,7 @@ h1 {
     margin-bottom: 1.5rem !important;
   }
   
-  md-outlined-button {
+  body md-outlined-button, .main-app-content md-outlined-button, #model-config-container md-outlined-button {
     min-width: 96vw;
     max-width: 420px;
     --md-outlined-button-container-height: 100px;
@@ -308,7 +308,7 @@ h1 {
     padding: 12px 16px !important;
   }
   
-  md-outlined-button[onclick*="connectBtnClick"] {
+  body md-outlined-button[onclick*="connectBtnClick"], .main-app-content md-outlined-button[onclick*="connectBtnClick"], #model-config-container md-outlined-button[onclick*="connectBtnClick"] {
     --md-outlined-button-container-height: 160px;
     --md-outlined-button-label-text-size: 52px;
     --md-outlined-button-label-text-weight: 800;
@@ -320,7 +320,7 @@ h1 {
     line-height: 1.1 !important;
   }
   
-  md-outlined-button[onclick*="disconnectBtnClick"] {
+  body md-outlined-button[onclick*="disconnectBtnClick"], .main-app-content md-outlined-button[onclick*="disconnectBtnClick"], #model-config-container md-outlined-button[onclick*="disconnectBtnClick"] {
     --md-outlined-button-container-height: 120px;
     --md-outlined-button-label-text-size: 38px;
     --md-outlined-button-label-text-weight: 700;
@@ -332,7 +332,7 @@ h1 {
 
 /* Tablet responsive design */
 @media (min-width: 481px) and (max-width: 768px) {
-  md-outlined-button {
+  body md-outlined-button, .main-app-content md-outlined-button, #model-config-container md-outlined-button {
     min-width: 85vw;
     max-width: 550px;
     --md-outlined-button-container-height: 100px;
@@ -341,7 +341,7 @@ h1 {
     padding: 10px 18px !important;
   }
   
-  md-outlined-button[onclick*="connectBtnClick"] {
+  body md-outlined-button[onclick*="connectBtnClick"], .main-app-content md-outlined-button[onclick*="connectBtnClick"], #model-config-container md-outlined-button[onclick*="connectBtnClick"] {
     --md-outlined-button-container-height: 160px;
     --md-outlined-button-label-text-size: 52px;
     --md-outlined-button-label-text-line-height: 1.2;
@@ -351,7 +351,7 @@ h1 {
     line-height: 1.2 !important;
   }
   
-  md-outlined-button[onclick*="disconnectBtnClick"] {
+  body md-outlined-button[onclick*="disconnectBtnClick"], .main-app-content md-outlined-button[onclick*="disconnectBtnClick"], #model-config-container md-outlined-button[onclick*="disconnectBtnClick"] {
     --md-outlined-button-container-height: 120px;
     --md-outlined-button-label-text-size: 36px;
     min-width: 85vw;
@@ -378,7 +378,7 @@ h1 {
   #model-state {
     height: 30vh;
   }
-}"
+}
 
 #video {
   width: 100%;
@@ -469,8 +469,8 @@ md-outlined-button[onclick*="disconnectBtnClick"] {
   width: 100%;
   height: 30vh;
   background: linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.98) 100%);
-  backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border-top: 3px solid rgba(148, 163, 184, 0.4);
   box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.15);
   z-index: 1000;
