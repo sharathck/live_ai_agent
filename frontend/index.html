@@ -35,7 +35,7 @@
   <script>
     // Read URL parameter and set appropriate heading
     const urlParams = new URLSearchParams(window.location.search);
-    const app = urlParams.get('app');
+    let app = urlParams.get('app');
     // if app is blank, then default it to 'restaurant'
     if (!app) {
       app = 'restaurant';
