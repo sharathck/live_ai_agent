@@ -1,5 +1,5 @@
 window.addEventListener("load", (event) => {
-    console.log("Hello Gemini Realtime Demo!");
+    console.log("Live Agent is loaded");
 
     // Don't show any status on initial load - keep bottom bar hidden
     hideStatusBar();
@@ -352,6 +352,7 @@ function setAppStatus(status) {
     connecting.style.display = "none";
     connected.style.display = "none";
     speaking.style.display = "none";
+    
 
     // Show ONLY the current status and manage button visibility
     // Show all 4 individual states: disconnected, connecting, connected, speaking

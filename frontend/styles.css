@@ -216,29 +216,34 @@ h1 {
   }
   
   md-outlined-button {
-    min-width: 85vw;
-    max-width: 400px;
-    --md-outlined-button-container-height: 80px;
-    --md-outlined-button-label-text-size: 22px;
+    min-width: 90vw;
+    max-width: 450px;
+    --md-outlined-button-container-height: 90px;
+    --md-outlined-button-label-text-size: 26px;
     --md-outlined-button-label-text-weight: 700;
-    margin: 15px 0;
+    margin: 18px 0;
+    padding: 8px 16px !important;
   }
   
   md-outlined-button[onclick*="connectBtnClick"] {
-    --md-outlined-button-container-height: 120px;
-    --md-outlined-button-label-text-size: 36px;
+    --md-outlined-button-container-height: 140px;
+    --md-outlined-button-label-text-size: 42px;
     --md-outlined-button-label-text-weight: 800;
-    min-width: 90vw;
+    --md-outlined-button-label-text-line-height: 1.2;
+    min-width: 95vw;
     font-weight: 800 !important;
-    margin: 20px 0;
+    margin: 25px 0;
+    padding: 16px 20px !important;
+    line-height: 1.2 !important;
   }
   
   md-outlined-button[onclick*="disconnectBtnClick"] {
-    --md-outlined-button-container-height: 100px;
-    --md-outlined-button-label-text-size: 28px;
+    --md-outlined-button-container-height: 110px;
+    --md-outlined-button-label-text-size: 32px;
     --md-outlined-button-label-text-weight: 700;
-    min-width: 85vw;
-    margin: 15px 0;
+    min-width: 90vw;
+    margin: 18px 0;
+    padding: 8px 16px !important;
   }
 }
 
@@ -267,54 +272,64 @@ h1 {
   }
   
   md-outlined-button {
-    min-width: 90vw;
-    max-width: 350px;
-    --md-outlined-button-container-height: 90px;
-    --md-outlined-button-label-text-size: 24px;
+    min-width: 95vw;
+    max-width: 380px;
+    --md-outlined-button-container-height: 100px;
+    --md-outlined-button-label-text-size: 28px;
     --md-outlined-button-label-text-weight: 700;
-    margin: 18px 0;
+    margin: 22px 0;
+    padding: 12px 18px !important;
   }
   
   md-outlined-button[onclick*="connectBtnClick"] {
-    --md-outlined-button-container-height: 130px;
-    --md-outlined-button-label-text-size: 38px;
+    --md-outlined-button-container-height: 150px;
+    --md-outlined-button-label-text-size: 44px;
     --md-outlined-button-label-text-weight: 800;
-    min-width: 95vw;
+    --md-outlined-button-label-text-line-height: 1.2;
+    min-width: 98vw;
     font-weight: 800 !important;
-    margin: 25px 0;
+    margin: 30px 0;
+    padding: 20px 20px !important;
+    line-height: 1.2 !important;
   }
   
   md-outlined-button[onclick*="disconnectBtnClick"] {
-    --md-outlined-button-container-height: 110px;
-    --md-outlined-button-label-text-size: 30px;
+    --md-outlined-button-container-height: 120px;
+    --md-outlined-button-label-text-size: 34px;
     --md-outlined-button-label-text-weight: 700;
-    min-width: 90vw;
-    margin: 18px 0;
+    min-width: 95vw;
+    margin: 22px 0;
+    padding: 12px 18px !important;
   }
 }
 
 /* Tablet responsive design */
 @media (min-width: 481px) and (max-width: 768px) {
   md-outlined-button {
-    min-width: 70vw;
-    max-width: 450px;
-    --md-outlined-button-container-height: 75px;
-    --md-outlined-button-label-text-size: 20px;
-    margin: 12px 0;
+    min-width: 80vw;
+    max-width: 500px;
+    --md-outlined-button-container-height: 85px;
+    --md-outlined-button-label-text-size: 24px;
+    margin: 15px 0;
+    padding: 6px 16px !important;
   }
   
   md-outlined-button[onclick*="connectBtnClick"] {
-    --md-outlined-button-container-height: 115px;
-    --md-outlined-button-label-text-size: 34px;
-    min-width: 75vw;
-    margin: 18px 0;
+    --md-outlined-button-container-height: 125px;
+    --md-outlined-button-label-text-size: 38px;
+    --md-outlined-button-label-text-line-height: 1.2;
+    min-width: 85vw;
+    margin: 22px 0;
+    padding: 12px 18px !important;
+    line-height: 1.2 !important;
   }
   
   md-outlined-button[onclick*="disconnectBtnClick"] {
-    --md-outlined-button-container-height: 95px;
-    --md-outlined-button-label-text-size: 26px;
-    min-width: 70vw;
-    margin: 12px 0;
+    --md-outlined-button-container-height: 105px;
+    --md-outlined-button-label-text-size: 30px;
+    min-width: 80vw;
+    margin: 15px 0;
+    padding: 6px 16px !important;
   }
 }
 
@@ -370,6 +385,7 @@ md-outlined-button[onclick*="connectBtnClick"] {
   --md-outlined-button-container-height: 100px;
   --md-outlined-button-label-text-size: 32px;
   --md-outlined-button-label-text-weight: 800;
+  --md-outlined-button-label-text-line-height: 1.2;
   --md-outlined-button-outline-color: transparent;
   --md-outlined-button-label-text-color: #15803d;
   --md-outlined-button-hover-state-layer-color: #22c55e;
@@ -385,6 +401,8 @@ md-outlined-button[onclick*="connectBtnClick"] {
   justify-content: center !important;
   align-items: center !important;
   display: flex !important;
+  padding: 8px 16px !important;
+  line-height: 1.2 !important;
 }
 
 md-outlined-button[onclick*="connectBtnClick"]:hover {
