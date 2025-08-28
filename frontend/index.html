@@ -110,7 +110,10 @@
       value=""
     ></md-outlined-text-field>
     <script>
-      fetch(`https://genaiapp-892085575649.us-central1.run.app/proxy-download?url=https://storage.googleapis.com/reviewtext/${app || '_system_instructions'}.md`)
+      console.log('app:', app)
+      const filename = app ? `${app}_system_instructions.md` : 'restaurant_system_instructions.md';
+      console.log('filename:', filename);
+      fetch(`https://genaiapp-892085575649.us-central1.run.app/proxy-download?url=https://storage.googleapis.com/reviewtext/${filename}`)
       .then(response => response.text())
       .then(text => {
         if (text.length < 5) {
