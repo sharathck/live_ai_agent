@@ -29,7 +29,34 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <h1 class="md-typescale-display-medium">Live Voice Chat Agent</h1>
+  <h1 class="md-typescale-display-medium">Live Voice Chat</h1>
+  <h2 id="appHeading" class="md-typescale-headline-medium"></h2>
+  
+  <script>
+    // Read URL parameter and set appropriate heading
+    const urlParams = new URLSearchParams(window.location.search);
+    const app = urlParams.get('app');
+    // if app is blank, then default it to 'restaurant'
+    if (!app) {
+      app = 'restaurant';
+    }
+    const appHeading = document.getElementById('appHeading');
+    
+    switch(app) {
+      case 'learn-telugu':
+        appHeading.textContent = 'Learn Telugu (for native English speakers)';
+        break;
+      case 'learn-english':
+        appHeading.textContent = 'Learn English (for native Telugu speakers)';
+        break;
+      case 'restaurant':
+        appHeading.textContent = 'Indian Restaurant Receptionist';
+        break;
+      default:
+        appHeading.textContent = 'Indian Restaurant Receptionist';
+    }
+  </script>
+  
   <br />
 
   <div id="model-config-container">
@@ -83,7 +110,7 @@
       value=""
     ></md-outlined-text-field>
     <script>
-      fetch('https://genaiapp-892085575649.us-central1.run.app/proxy-download?url=https://storage.googleapis.com/reviewtext/system_instructions.md')
+      fetch(`https://genaiapp-892085575649.us-central1.run.app/proxy-download?url=https://storage.googleapis.com/reviewtext/${app || '_system_instructions'}.md`)
       .then(response => response.text())
       .then(text => {
         if (text.length < 5) {

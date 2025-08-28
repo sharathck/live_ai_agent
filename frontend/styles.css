@@ -216,18 +216,29 @@ h1 {
   }
   
   md-outlined-button {
-    min-width: 90vw;
+    min-width: 85vw;
     max-width: 400px;
-    --md-outlined-button-container-height: 70px;
-    --md-outlined-button-label-text-size: 20px;
+    --md-outlined-button-container-height: 80px;
+    --md-outlined-button-label-text-size: 22px;
+    --md-outlined-button-label-text-weight: 700;
+    margin: 15px 0;
   }
   
   md-outlined-button[onclick*="connectBtnClick"] {
-    --md-outlined-button-container-height: 110px;
-    --md-outlined-button-label-text-size: 34px;
+    --md-outlined-button-container-height: 120px;
+    --md-outlined-button-label-text-size: 36px;
     --md-outlined-button-label-text-weight: 800;
-    min-width: 95vw;
+    min-width: 90vw;
     font-weight: 800 !important;
+    margin: 20px 0;
+  }
+  
+  md-outlined-button[onclick*="disconnectBtnClick"] {
+    --md-outlined-button-container-height: 100px;
+    --md-outlined-button-label-text-size: 28px;
+    --md-outlined-button-label-text-weight: 700;
+    min-width: 85vw;
+    margin: 15px 0;
   }
 }
 
@@ -253,6 +264,57 @@ h1 {
   .state .material-symbols-outlined {
     font-size: 5rem !important;
     margin-bottom: 1.5rem !important;
+  }
+  
+  md-outlined-button {
+    min-width: 90vw;
+    max-width: 350px;
+    --md-outlined-button-container-height: 90px;
+    --md-outlined-button-label-text-size: 24px;
+    --md-outlined-button-label-text-weight: 700;
+    margin: 18px 0;
+  }
+  
+  md-outlined-button[onclick*="connectBtnClick"] {
+    --md-outlined-button-container-height: 130px;
+    --md-outlined-button-label-text-size: 38px;
+    --md-outlined-button-label-text-weight: 800;
+    min-width: 95vw;
+    font-weight: 800 !important;
+    margin: 25px 0;
+  }
+  
+  md-outlined-button[onclick*="disconnectBtnClick"] {
+    --md-outlined-button-container-height: 110px;
+    --md-outlined-button-label-text-size: 30px;
+    --md-outlined-button-label-text-weight: 700;
+    min-width: 90vw;
+    margin: 18px 0;
+  }
+}
+
+/* Tablet responsive design */
+@media (min-width: 481px) and (max-width: 768px) {
+  md-outlined-button {
+    min-width: 70vw;
+    max-width: 450px;
+    --md-outlined-button-container-height: 75px;
+    --md-outlined-button-label-text-size: 20px;
+    margin: 12px 0;
+  }
+  
+  md-outlined-button[onclick*="connectBtnClick"] {
+    --md-outlined-button-container-height: 115px;
+    --md-outlined-button-label-text-size: 34px;
+    min-width: 75vw;
+    margin: 18px 0;
+  }
+  
+  md-outlined-button[onclick*="disconnectBtnClick"] {
+    --md-outlined-button-container-height: 95px;
+    --md-outlined-button-label-text-size: 26px;
+    min-width: 70vw;
+    margin: 12px 0;
   }
 }
 
