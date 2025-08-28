@@ -1,0 +1,4 @@
+backend/reviewtext-ad5c6-vertex-ai.json
+*.log
+__pycache__/
+*.pyc
