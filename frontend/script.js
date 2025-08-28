@@ -15,9 +15,17 @@ const PROXY_URL = window.location.host.includes('8077')
         ? "wss://live-agent-learn-english-892085575649.us-central1.run.app//wss"
         : "ws://localhost:8000/ws";
 const PROJECT_ID = "reviewtext-ad5c6";
-const MODEL = "gemini-live-2.5-flash-preview-native-audio";
-//const MODEL = "gemini-2.0-flash-live-preview-04-09";
-//const MODEL = "gemini-2.5-flash-preview-native-audio-dialog";
+
+let modelValue = '';
+// Check for model URL parameter and use it if valid
+const modelParam = new URLSearchParams(window.location.search).get('model');
+if (modelParam && modelParam.length > 2) {
+    modelValue = modelParam;
+} else {
+    modelValue = "gemini-live-2.5-flash-preview-native-audio";
+//another option is "gemini-2.0-flash-live-preview-04-09";
+}
+const MODEL = modelValue;
 const API_HOST = "us-central1-aiplatform.googleapis.com";
 
 
