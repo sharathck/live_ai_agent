@@ -1,6 +1,9 @@
 window.addEventListener("load", (event) => {
     console.log("Hello Gemini Realtime Demo!");
 
+    // Don't show any status on initial load - keep bottom bar hidden
+    hideStatusBar();
+    
     setAvailableCamerasOptions();
     setAvailableMicrophoneOptions();
 });
@@ -47,6 +50,7 @@ const geminiLiveApi = new GeminiLiveAPI(PROXY_URL, PROJECT_ID, MODEL, API_HOST);
 geminiLiveApi.onErrorMessage = (message) => {
     showDialogWithMessage(message);
     setAppStatus("disconnected");
+    stopAudioInput();
 };
 
 function getSelectedResponseModality() {
@@ -84,14 +88,35 @@ function connectBtnClick() {
     geminiLiveApi.connect();
 }
 
+function disconnectBtnClick() {
+    hideStatusBar();
+    geminiLiveApi.disconnect();
+    stopAudioInput();
+}
+
 const liveAudioOutputManager = new LiveAudioOutputManager();
 
 geminiLiveApi.onReceiveResponse = (messageResponse) => {
     if (messageResponse.type == "AUDIO") {
+        // Set status to "speaking" when receiving audio response
+        setAppStatus("speaking");
         liveAudioOutputManager.playAudioChunk(messageResponse.data);
+        
+        // Set a timer to return to "connected" after audio finishes
+        // This is a rough estimate - you may want to use audio events for more precision
+        setTimeout(() => {
+            setAppStatus("connected");
+        }, 2000); // Adjust timing as needed
+        
     } else if (messageResponse.type == "TEXT") {
         console.log("Gemini said: ", messageResponse.data);
         newModelMessage(messageResponse.data);
+        
+        // For text responses, briefly show speaking then return to connected
+        setAppStatus("speaking");
+        setTimeout(() => {
+            setAppStatus("connected");
+        }, 1000);
     }
 };
 
@@ -188,11 +213,6 @@ function newMicSelected() {
     liveAudioInputManager.updateMicrophoneDevice(micSelect.value);
 }
 
-function disconnectBtnClick() {
-    setAppStatus("disconnected");
-    geminiLiveApi.disconnect();
-    stopAudioInput();
-}
 
 function showDialogWithMessage(messageText) {
     const dialog = document.getElementById("dialog");
@@ -249,25 +269,100 @@ async function setAvailableMicrophoneOptions() {
     setMaterialSelect(mics, audioSelect);
 }
 
+function showStatusBar() {
+    const statusBar = document.getElementById("model-state");
+    if (statusBar) {
+        statusBar.style.display = "flex";
+        document.body.classList.add("status-bar-visible");
+    }
+}
+
+function hideStatusBar() {
+    const statusBar = document.getElementById("model-state");
+    if (statusBar) {
+        statusBar.style.display = "none";
+        document.body.classList.remove("status-bar-visible");
+    }
+    // When status bar is hidden, show connect button and hide disconnect button
+    showConnectButton();
+    hideDisconnectButton();
+}
+
+function showConnectButton() {
+    const connectBtn = document.querySelector('md-outlined-button[onclick*="connectBtnClick"]');
+    if (connectBtn) connectBtn.style.display = "inline-flex";
+}
+
+function hideConnectButton() {
+    const connectBtn = document.querySelector('md-outlined-button[onclick*="connectBtnClick"]');
+    if (connectBtn) connectBtn.style.display = "none";
+}
+
+function showDisconnectButton() {
+    const disconnectBtn = document.querySelector('md-outlined-button[onclick*="disconnectBtnClick"]');
+    if (disconnectBtn) disconnectBtn.style.display = "inline-flex";
+}
+
+function hideDisconnectButton() {
+    const disconnectBtn = document.querySelector('md-outlined-button[onclick*="disconnectBtnClick"]');
+    if (disconnectBtn) disconnectBtn.style.display = "none";
+}
+
 function setAppStatus(status) {
+    // Show status bar when setting any status
+    showStatusBar();
+    
+    // Hide ALL status elements first
     disconnected.hidden = true;
     connecting.hidden = true;
     connected.hidden = true;
     speaking.hidden = true;
 
+    // Also hide via CSS display for extra safety
+    disconnected.style.display = "none";
+    connecting.style.display = "none";
+    connected.style.display = "none";
+    speaking.style.display = "none";
+
+    // Show ONLY the current status and manage button visibility
+    // Show all 4 individual states: disconnected, connecting, connected, speaking
     switch (status) {
         case "disconnected":
             disconnected.hidden = false;
+            disconnected.style.display = "flex";
+            // Show connect button, hide disconnect button
+            showConnectButton();
+            hideDisconnectButton();
             break;
         case "connecting":
             connecting.hidden = false;
+            connecting.style.display = "flex";
+            // Show connect button (still connecting), hide disconnect button
+            showConnectButton();
+            hideDisconnectButton();
             break;
         case "connected":
             connected.hidden = false;
+            connected.style.display = "flex";
+            // Hide connect button, show disconnect button
+            hideConnectButton();
+            showDisconnectButton();
             break;
         case "speaking":
             speaking.hidden = false;
+            speaking.style.display = "flex";
+            // Hide connect button, show disconnect button
+            hideConnectButton();
+            showDisconnectButton();
             break;
         default:
+            // Default to disconnected if unknown status
+            disconnected.hidden = false;
+            disconnected.style.display = "flex";
+            // Show connect button, hide disconnect button
+            showConnectButton();
+            hideDisconnectButton();
     }
+    
+    console.log("Status changed to:", status);
 }
