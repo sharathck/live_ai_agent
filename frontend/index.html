@@ -140,11 +140,21 @@
   </div>
   <br />
 
-  <!-- Video preview container required by LiveVideoManager -->
-  <div id="video-preview"  style="display: none;">
-    <video id="video" playsinline autoplay muted></video>
+  <!-- Text input visible only for non-restaurant apps -->
+  <div id="text-message-container" style="display: none;">
+    <div>
+      <md-outlined-text-field
+        id="text-message"
+        label="Text Message"
+        value=""
+      ></md-outlined-text-field>
+      <md-icon-button onclick="newUserMessage()">
+        <md-icon>send</md-icon>
+      </md-icon-button>
+      <br />
+      <div id="text-chat"></div>
+    </div>
   </div>
-  <canvas id="canvas"></canvas>
 
   <div id="model-state">
     <div id="disconnected" class="state">

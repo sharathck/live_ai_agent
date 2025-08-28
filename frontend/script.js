@@ -6,6 +6,7 @@ window.addEventListener("load", (event) => {
     
     setAvailableCamerasOptions();
     setAvailableMicrophoneOptions();
+    toggleTextMessageVisibility();
 });
 
 // Automatically select URL based on hostname
@@ -47,10 +48,9 @@ const speaking = document.getElementById("speaking");
 
 const micBtn = document.getElementById("micBtn");
 const micOffBtn = document.getElementById("micOffBtn");
-const cameraBtn = document.getElementById("cameraBtn");
-const screenBtn = document.getElementById("screenBtn");
+// Removed camera/screen buttons
 
-const cameraSelect = document.getElementById("cameraSource");
+const cameraSelect = document.getElementById("cameraSource"); // optional / may be absent
 const micSelect = document.getElementById("audioSource");
 
 const geminiLiveApi = new GeminiLiveAPI(PROXY_URL, PROJECT_ID, MODEL, API_HOST);
@@ -182,45 +182,7 @@ function micOffBtnClick() {
     micOffBtn.hidden = true;
 }
 
-const videoElement = document.getElementById("video");
-const canvasElement = document.getElementById("canvas");
-
-const liveVideoManager = new LiveVideoManager(videoElement, canvasElement);
-
-const liveScreenManager = new LiveScreenManager(videoElement, canvasElement);
-
-liveVideoManager.onNewFrame = (b64Image) => {
-    geminiLiveApi.sendImageMessage(b64Image);
-};
-
-liveScreenManager.onNewFrame = (b64Image) => {
-    geminiLiveApi.sendImageMessage(b64Image);
-};
-
-function startCameraCapture() {
-    liveScreenManager.stopCapture();
-    liveVideoManager.startWebcam();
-}
-
-function startScreenCapture() {
-    liveVideoManager.stopWebcam();
-    liveScreenManager.startCapture();
-}
-
-function cameraBtnClick() {
-    startCameraCapture();
-    console.log("cameraBtnClick");
-}
-
-function screenShareBtnClick() {
-    startScreenCapture();
-    console.log("screenShareBtnClick");
-}
-
-function newCameraSelected() {
-    console.log("newCameraSelected ", cameraSelect.value);
-    liveVideoManager.updateWebcamDevice(cameraSelect.value);
-}
+// Removed all video/screen capture code
 
 function newMicSelected() {
     console.log("newMicSelected", micSelect.value);
@@ -297,6 +259,19 @@ async function setAvailableMicrophoneOptions() {
         return;
     }
     setMaterialSelect(mics, audioSelect);
+}
+
+function toggleTextMessageVisibility() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const app = urlParams.get('app') || 'restaurant';
+        const container = document.getElementById('text-message-container');
+        if (!container) return;
+        // Show for any app except 'restaurant'
+        container.style.display = (app && app.toLowerCase() !== 'restaurant') ? 'block' : 'none';
+    } catch (e) {
+        console.warn('toggleTextMessageVisibility failed', e);
+    }
 }
 
 function showStatusBar() {
