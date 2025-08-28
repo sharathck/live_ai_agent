@@ -48,7 +48,13 @@ const micSelect = document.getElementById("audioSource");
 const geminiLiveApi = new GeminiLiveAPI(PROXY_URL, PROJECT_ID, MODEL, API_HOST);
 
 geminiLiveApi.onErrorMessage = (message) => {
-    showDialogWithMessage(message);
+    // Don't show popup for normal disconnection scenarios
+    if (message && 
+        !message.toLowerCase().includes('closed') && 
+        !message.toLowerCase().includes('disconnect') &&
+        !message.toLowerCase().includes('connection closed')) {
+        showDialogWithMessage(message);
+    }
     setAppStatus("disconnected");
     stopAudioInput();
 };
@@ -289,22 +295,24 @@ function hideStatusBar() {
 }
 
 function showConnectButton() {
-    const connectBtn = document.querySelector('md-outlined-button[onclick*="connectBtnClick"]');
+    console.log("Showing connect button");
+    const connectBtn = document.querySelector('#connectBtn');
     if (connectBtn) connectBtn.style.display = "inline-flex";
 }
 
 function hideConnectButton() {
-    const connectBtn = document.querySelector('md-outlined-button[onclick*="connectBtnClick"]');
+    console.log("Hiding connect button");
+    const connectBtn = document.querySelector('#connectBtn');
     if (connectBtn) connectBtn.style.display = "none";
 }
 
 function showDisconnectButton() {
-    const disconnectBtn = document.querySelector('md-outlined-button[onclick*="disconnectBtnClick"]');
+    const disconnectBtn = document.querySelector('#disConnectBtn');
     if (disconnectBtn) disconnectBtn.style.display = "inline-flex";
 }
 
 function hideDisconnectButton() {
-    const disconnectBtn = document.querySelector('md-outlined-button[onclick*="disconnectBtnClick"]');
+    const disconnectBtn = document.querySelector('#disConnectBtn');
     if (disconnectBtn) disconnectBtn.style.display = "none";
 }
 
