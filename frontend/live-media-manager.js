@@ -142,14 +142,47 @@ class LiveAudioInputManager {
     }
 
     disconnectMicrophone() {
-        try {
-            this.processor.disconnect();
-            this.audioContext.close();
-        } catch {
-            console.error("Error disconnecting microphone");
+        // Stop periodic recording
+        if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = null;
         }
 
-        clearInterval(this.interval);
+        // Disconnect processor safely
+        if (this.processor) {
+            try {
+                this.processor.disconnect();
+            } catch (e) {
+                // ignore; already disconnected
+            }
+            this.processor.onaudioprocess = null;
+            this.processor = null;
+        }
+
+        // Stop microphone stream tracks
+        if (this.stream && typeof this.stream.getTracks === 'function') {
+            try {
+                this.stream.getTracks().forEach((t) => {
+                    try { t.stop(); } catch (e) { /* ignore */ }
+                });
+            } catch (e) {
+                // ignore
+            }
+            this.stream = null;
+        }
+
+        // Close audio context if open
+        if (this.audioContext) {
+            try {
+                // Only close if not already closed
+                if (this.audioContext.state !== 'closed') {
+                    this.audioContext.close();
+                }
+            } catch (e) {
+                // ignore; some browsers throw if already closing/closed
+            }
+            this.audioContext = null;
+        }
     }
 
     async updateMicrophoneDevice(deviceId) {
