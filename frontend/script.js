@@ -11,7 +11,7 @@ window.addEventListener("load", (event) => {
 // Automatically select URL based on hostname
 const PROXY_URL = window.location.host.includes('8077')
     ? "ws://localhost:8080"
-    : window.location.hostname.startsWith('live-agent') 
+    : window.location.hostname.includes('.run.')
         ? "wss://live-agent-learn-english-892085575649.us-central1.run.app//wss"
         : "ws://localhost:8000/ws";
 const PROJECT_ID = "reviewtext-ad5c6";
