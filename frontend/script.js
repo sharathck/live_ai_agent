@@ -297,23 +297,44 @@ function hideStatusBar() {
 function showConnectButton() {
     console.log("Showing connect button");
     const connectBtn = document.querySelector('#connectBtn');
-    if (connectBtn) connectBtn.style.display = "inline-flex";
+    if (connectBtn) {
+        connectBtn.style.display = "inline-flex";
+        connectBtn.style.visibility = "visible";
+        connectBtn.style.opacity = "1";
+        connectBtn.hidden = false;
+    }
 }
 
 function hideConnectButton() {
     console.log("Hiding connect button");
     const connectBtn = document.querySelector('#connectBtn');
-    if (connectBtn) connectBtn.style.display = "none";
+    if (connectBtn) {
+        connectBtn.style.display = "none !important";
+        connectBtn.style.visibility = "hidden";
+        connectBtn.style.opacity = "0";
+        connectBtn.hidden = true;
+    }
 }
 
 function showDisconnectButton() {
     const disconnectBtn = document.querySelector('#disConnectBtn');
-    if (disconnectBtn) disconnectBtn.style.display = "inline-flex";
+    if (disconnectBtn) {
+        disconnectBtn.style.display = "inline-flex";
+        disconnectBtn.style.visibility = "visible";
+        disconnectBtn.style.opacity = "1";
+        disconnectBtn.hidden = false;
+    }
 }
 
 function hideDisconnectButton() {
+    console.log("Hiding disconnect button");
     const disconnectBtn = document.querySelector('#disConnectBtn');
-    if (disconnectBtn) disconnectBtn.style.display = "none";
+    if (disconnectBtn) {
+        disconnectBtn.style.display = "none !important";
+        disconnectBtn.style.visibility = "hidden";
+        disconnectBtn.style.opacity = "0";
+        disconnectBtn.hidden = true;
+    }
 }
 
 function setAppStatus(status) {
