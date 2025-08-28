@@ -163,6 +163,10 @@ class LiveVideoManager {
     constructor(previewVideoElement, previewCanvasElement) {
         this.previewVideoElement = previewVideoElement;
         this.previewCanvasElement = previewCanvasElement;
+        // Guard against missing DOM elements
+        if (!this.previewCanvasElement) {
+            throw new Error("LiveVideoManager: previewCanvasElement is null");
+        }
         this.ctx = this.previewCanvasElement.getContext("2d");
         this.stream = null;
         this.interval = null;
@@ -214,7 +218,8 @@ class LiveVideoManager {
     }
 
     captureFrameB64() {
-        if (this.stream == null) return "";
+    if (this.stream == null) return "";
+    if (!this.previewVideoElement || !this.previewCanvasElement || !this.ctx) return "";
 
         this.previewCanvasElement.width = this.previewVideoElement.videoWidth;
         this.previewCanvasElement.height = this.previewVideoElement.videoHeight;
@@ -234,7 +239,7 @@ class LiveVideoManager {
 
     newFrame() {
         console.log("capturing new frame");
-        const frameData = this.captureFrameB64();
+    const frameData = this.captureFrameB64();
         this.onNewFrame(frameData);
     }
 }
@@ -243,6 +248,9 @@ class LiveScreenManager {
     constructor(previewVideoElement, previewCanvasElement) {
         this.previewVideoElement = previewVideoElement;
         this.previewCanvasElement = previewCanvasElement;
+        if (!this.previewCanvasElement) {
+            throw new Error("LiveScreenManager: previewCanvasElement is null");
+        }
         this.ctx = this.previewCanvasElement.getContext("2d");
         this.stream = null;
         this.interval = null;
@@ -274,7 +282,8 @@ class LiveScreenManager {
     }
 
     captureFrameB64() {
-        if (this.stream == null) return "";
+    if (this.stream == null) return "";
+    if (!this.previewVideoElement || !this.previewCanvasElement || !this.ctx) return "";
 
         this.previewCanvasElement.width = this.previewVideoElement.videoWidth;
         this.previewCanvasElement.height = this.previewVideoElement.videoHeight;

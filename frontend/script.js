@@ -250,14 +250,22 @@ async function getAvailableDevices(deviceType) {
 }
 
 async function getAvailableCameras() {
-    return await this.getAvailableDevices("videoinput");
+    return await getAvailableDevices("videoinput");
 }
 
 async function getAvailableAudioInputs() {
-    return await this.getAvailableDevices("audioinput");
+    return await getAvailableDevices("audioinput");
 }
 
 function setMaterialSelect(allOptions, selectElement) {
+    if (!selectElement) {
+        console.warn("setMaterialSelect: selectElement not found, skipping population");
+        return;
+    }
+    if (!Array.isArray(allOptions)) {
+        console.warn("setMaterialSelect: invalid options, expected array");
+        return;
+    }
     allOptions.forEach((optionData) => {
         const option = document.createElement("md-select-option");
         option.value = optionData.id;
@@ -267,19 +275,27 @@ function setMaterialSelect(allOptions, selectElement) {
         slotDiv.innerHTML = optionData.name;
         option.appendChild(slotDiv);
 
-        selectElement.appendChild(option);
+    selectElement.appendChild(option);
     });
 }
 
 async function setAvailableCamerasOptions() {
     const cameras = await getAvailableCameras();
     const videoSelect = document.getElementById("cameraSource");
+    if (!videoSelect) {
+        console.info("Camera select element not present; skipping camera list population.");
+        return;
+    }
     setMaterialSelect(cameras, videoSelect);
 }
 
 async function setAvailableMicrophoneOptions() {
     const mics = await getAvailableAudioInputs();
     const audioSelect = document.getElementById("audioSource");
+    if (!audioSelect) {
+        console.info("Microphone select element not present; skipping mic list population.");
+        return;
+    }
     setMaterialSelect(mics, audioSelect);
 }
 
